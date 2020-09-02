@@ -1,21 +1,12 @@
 {
   "canisters": {
-    "data_structures": {
-      "main": "src/data_structures/main.mo",
+    "BloomFilter": {
+      "main": "src/BloomFilter/Main.mo",
       "type": "motoko"
     },
-    "data_structures_assets": {
-      "dependencies": [
-        "data_structures"
-      ],
-      "frontend": {
-        "entrypoint": "src/data_structures_assets/public/index.js"
-      },
-      "source": [
-        "src/data_structures_assets/assets",
-        "dist/data_structures_assets/"
-      ],
-      "type": "assets"
+    "BST": {
+      "main": "src/BinarySearchTree/Main.mo",
+      "type": "motoko"
     }
   },
   "defaults": {

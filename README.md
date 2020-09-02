@@ -1,20 +1,10 @@
-# data_structures
+Table of Contents
 
-Welcome to your new data_structures project and to the internet computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
+    Module 1: Data Structures on the Internet Computer
+    Module 2: Object-Oriented Data Structure: Bloom Filters
+    Module 3: Pure Data Structures: Binary Search Trees
+    Module 4: Scaling Data Structures with `BigMap`
 
-To get started, you might want to explore the project directory structure and the default configuration file. Working with this project in your development environment will not affect any production deployment or identity tokens.
+About
 
-To learn more before you start working with data_structures, see the following documentation available online:
-
-- [Quick Start](https://sdk.dfinity.org/docs/quickstart/quickstart.html)
-- [SDK Developer Tools](https://sdk.dfinity.org/docs/developers-guide/sdk-guide.html)
-- [Motoko Programming Language Guide](https://sdk.dfinity.org/docs/language-guide/motoko.html)
-- [Motoko Language Quick Reference](https://sdk.dfinity.org/docs/language-guide/language-manual.html)
-
-If you want to start working on your project right away, you might want to try the following commands:
-
-```bash
-cd data_structures/
-dfx help
-dfx config --help
-```
+In this course, students will learn about the foundational elements of data structures as well as how they work on the Internet Computer. Module 1 serves as an intro to this unit, providing context for data structure design and the tradeoffs to consider when weighing which to use in certain projects. Module 2 and 3 explore the distinction between Motoko's differing styles for writing data structures: object-oriented (collection of functions that mutate state), and pure (no methods, no mutations). Module 4 builds on the data structures explored so far. Students will get hands-on experience via the IC's `BigMap` library, learning to scale their data structures beyond a single canister in the process.
