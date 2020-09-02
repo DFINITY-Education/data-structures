@@ -1,4 +1,4 @@
-# Data Structures on the Internet Computer
+# Module 1: Data Structures on the Internet Computer
 
 ## Outline
 
@@ -20,7 +20,7 @@ One common tradeoff exhibited in many data structures is that between **memory**
 
 To better understand the aforementioned tradeoff between memory and lookup time, consider the characteristics of **arrays** compared to **linked lists**. An **array** is a fixed-length data structure with constant [O(1)] lookup time. Once an array of a specified size is created, you can't increase its capacity without creating an entirely new array. As a result, the tradeoff for this superb lookup time is reduced flexibility (making arrays poor for dynamically growing/shrinking databases) and increased memory required (you may need to allocate more space than needed to memory if unsure of the exact size required).
 
-<img src="/Users/csol/Documents/Programming/Dfinity/array.png" alt="Array" width="400"/>
+<img src="images/array.png" alt="Array" width="400"/>
 
 <center>https://dzone.com/articles/data-structures-and-their-applications</center>
 
@@ -28,7 +28,7 @@ Conversely, a **linked list** is a dynamically-sized data structure consisting o
 
 Tradeoffs may also exist in the insertion or deletion time of a given data structure. These times depend of the form of insertion/deletion that takes place. For example, inserting at the beginning of a linked list is **O(1)**, whereas inserting at element at the end of the linked list is **O(n)**.
 
-![Linked List](/Users/csol/Documents/Programming/Dfinity/Singly-linked-list.svg)
+![Linked List](images/Singly-linked-list.svg)
 
 <center>https://en.wikipedia.org/wiki/Linked_list#/media/File:Singly-linked-list.svg</center>
 
@@ -40,7 +40,7 @@ A **hash table** is a data structure consisting of an array and corresponding li
 
 This, however, creates a problem: what happens when two distinct names result in the same index? This is bound to happen when the number of data values exceeds the size of the fixed array. Such an event, called a **collision**, is resolved by forming a linked list at that array index. In the diagram below, "Sandra Dee" hashes to the same index, 152, as "John Smith." As a result, the "John Smith" result just points to the location of "Sandra Dee" in the linked list, which can then be traversed to find the stored value for "John Smith".
 
-![Hash Table](/Users/csol/Documents/Programming/Dfinity/hash-table.svg)
+![Hash Table](images/hash-table.svg)
 
 <center>https://en.wikipedia.org/wiki/Hash_table#/media/File:Hash_table_5_0_1_1_1_1_0_LL.svg</center>
 
@@ -50,9 +50,9 @@ Hash tables are especially useful because they offer both dynamically-sized data
 
  A Binary search tree is a data structure in which each node points to two other nodes. These values are organized such that every node to the left of a given node is a smaller value, while every node to the right is a larger value. This allows for **O(log n)** search and insertion time as one traverses each "level" of the tree. Binary search trees provide quicker search than linked lists but do not preserve the insertion order of elements.
 
-![Binary Search Tree](/Users/csol/Documents/Programming/Dfinity/Binary_search_tree.svg)
+![Binary Search Tree](images/Binary_search_tree.svg)
 
-<center>https://en.wikipedia.org/wiki/Binary_search_tree#/media/File:Binary_search_tree.svg
+<center>https://en.wikipedia.org/wiki/Binary_search_tree#/media/File:Binary_search_tree.svg </center>
 
 ## Data Structures in Motoko
 
