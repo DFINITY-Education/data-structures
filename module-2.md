@@ -1,6 +1,6 @@
 # Module 2: Object-Oriented Data Structure: Bloom Filters
 
-Implement a bloom filter that allows users to determine if an item is present in a given set.
+In this Module, you will implement a bloom filter that allows users to determine if an item is present in a given set.
 
 ## Background
 
@@ -10,7 +10,7 @@ Such a data structure is especially useful in instances where we care more about
 
 Bloom filters use a **bitmap** as the base data structure. A bitmap is simply an array where each index contains either a 0 or a 1. The filter takes in the value that's being entered into the data structure, hashes it to multiple indices (ranging from 0 to the length - 1 of the bitmap) using several different hash functions, and stores a 1 at that particular index. The beauty of a bloom filter - and the aspect that makes it so space-efficient - is the fact that we don't need to actually store the given element in our set. We simply hash the element, go to the location in our bitmap that is hashes to, and insert a 1 into that spot (or multiple spots if using multiple hash functions).
 
-**Example bitmap with values initialized to 0**
+**Example bitmap with values initialized to 0:**
 
 | 0    | 0    | 0    | 0    | 0    | 0    | 0    | 0    | 0    | 0    |
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
@@ -28,7 +28,7 @@ Let's begin by taking a look at `BloomFilter.mo`. You'll see the `BloomFilter` c
 
 The first several lines of the `BloomFilter` class setup the optimal number (and size of) the slots in the `bitMap`, implemented as an `Array` of booleans initialized to `false`. `hashFuncs` contains all of the hash functions that will be used (the number of which also influences the false-positive error rate).
 
-`Main.mo` just sets up a `bloomFilter` and provides two functions, `bfAdd` and `bfCheck` that you can use to test your implementation "on the go" using the command-line interface.
+`Main.mo` just sets up a `bloomFilter` and provides two functions, `bfAdd` and `bfCheck`, that you can use to test your implementation "on the go" using the command-line interface.
 
 ### Specification
 

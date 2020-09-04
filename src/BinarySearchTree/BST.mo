@@ -107,6 +107,7 @@ module {
     };
   };
 
+  // Just hollow out the next() function - leave everything above that for students to have a good base to start from
   public func iter<X, Y>(t: Tree<X, Y>, traversal: Types.Traversal) : Iter<X, Y> {
     object {
       var treeIter : IterRep<X, Y> = ?(#tree(t), null);
