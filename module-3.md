@@ -8,7 +8,7 @@ We briefly discussed **Binary Search Trees** (BST) in [Module 1](/module-1.md#bi
 
 ## Your Task
 
-In this exercise, you will implement a binary search tree like the one described above. This data structure will be built entirely using pure, functional programing paradigms, unlike the object-oriented Bloom filter described in [Module 2](/Module-2.md).
+In this exercise, you will implement a binary search tree like the one described above. This data structure will be built entirely using pure, functional programing paradigms, unlike the object-oriented Bloom filter described in [Module 2](/module-2.md).
 
 ### Code Understanding
 
@@ -26,7 +26,7 @@ A `Tree` can also be a `#leaf`, which is essentially a `NULL` value in that it c
 
 We will get to the `Traversal` type later once we've reviewed more code, but suffice to say that it can be either a `preorder`, `postorder`, or `inorder`. 
 
-As is the case in [Module 2](/module-2.md#code-understanding)'s `BloomFilter`, `Tree` type takes advantage of **generic types**, represented by `X` and `Y`, which allows the BST implementation to remain type agnostic. More specifically, this means that the `Tree` and its related functions don't care if the items entered into it are of type `Text`, `Nat`, `Int`, etc. When you create a new `BST`, you specify the two types that the `BST` will handle. In this case, `X` represents the type for `key`s while `Y` represents the type for `value`s. All subsequent keys and values must match these two types, respectively. See `Main.mo` for an example of how one fills in these generic types with more specific ones!
+As is the case in [Module 2](/module-2.md#code-understanding)'s `BloomFilter`, the `Tree` type takes advantage of **generic types**, represented by `X` and `Y`, which allows the BST implementation to remain type agnostic. More specifically, this means that the `Tree` and its related functions don't care if the items entered into it are of type `Text`, `Nat`, `Int`, etc. When you create a new `BST`, you specify the two types that the `BST` will handle. In this case, `X` represents the type for `key`s while `Y` represents the type for `value`s. All subsequent keys and values must match these two types, respectively. See `Main.mo` for an example of how one fills in these generic types with more specific ones!
 
 #### `BST.mo`  
 
@@ -42,19 +42,19 @@ The rest of the functions are either simple (`height` and `size`) or ones that y
 
 **Task:** Complete the implementation of `get`, `put`, and `iter` in `BST.mo`
 
-`get` takes two arguments, `t` (the tree) and `key`, and returns the `value` of the `#node` in tree `t` with the given `key`
+**`get`** takes two arguments, `t` (the tree) and `key`, and returns the `value` of the `#node` in tree `t` with the given `key`
 
 * Start by thinking about the two cases that exist for a `Tree` type. Which case indicates that you've reached the end of the tree without finding the node? If this happens, you should return `null` because the tree doesn't contain a `node` with this `key`.
 * For a given `#node`, make sure to search the correct side of the tree depending on the output of applying `compareFunc` to `key` and the key of the current node being searched.
 
-`put` takes a Tree type, `t`, as well as the `key`, `val`, and `compareFunc` corresponding to a new `#node` that you want to insert into the BST and returns the new Tree with this `#node` added in the correct location.
+**`put`** takes a Tree type, `t`, as well as the `key`, `val`, and `compareFunc` corresponding to a new `#node` that you want to insert into the BST and returns the new Tree with this `#node` added in the correct location.
 
 * If `t` is just a `#leaf`, then the new `#node` you add will be the only node in the Tree
 * If `t ` is itself a `#node`, you must compare the given `key` to the `key` of that `#node` using the provided `compareFunc`. This is where the real thinking starts - you must place the new node into the correct position within the tree!
   * If the given `key` is equal to the node's key, then you should replace that node with the new node (remember to keep its left and right children, however).
   * If the given `key` is less than or greater than the node's key, then you must check the corresponding child (left or right depending on `compareFunc`'s result). Think about how you must handle the case in which the child is a `#leaf` vs the case where the child is a `#node` (one case will require calling `put` again).
 
-`iter` takes two arguments, `t` (the tree) and `traversal` (a variant type indicating instructions for how to traverse the tree), and returns an `Iter` object that allows you to iterate through the tree in a specified order.
+**`iter`** takes two arguments, `t` (the tree) and `traversal` (a variant type indicating instructions for how to traverse the tree), and returns an `Iter` object that allows you to iterate through the tree in a specified order.
 
 BSTs, unlike some linear data structures, can be traversed in several different ways. The three main ways are:
 
@@ -64,9 +64,7 @@ BSTs, unlike some linear data structures, can be traversed in several different 
 
 * **Postorder** traverses the left child, then the right child, and then the root node
 
-Feel free to read more about this topic [here](https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/).
-
-![Binary Search Tree](images/Binary_search_tree.svg)
+<div style="text-align:center"><img src="images/Binary_search_tree.svg" /></div>
 
 Given the above tree, here's how each of these orders would traverse it:
 
@@ -86,7 +84,7 @@ Given the above tree, here's how each of these orders would traverse it:
     2. Traverse the right subtree
     3. Visit the root
 
-As we previously saw in `Main.mo`, the `Traversal` type has three variants: `#preorder`, `#postorder`, `#inorder` corresponding to the three aforementioned traversal strategies. 
+Feel free to read more about this topic [here](https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/). As we previously saw in `Main.mo`, the `Traversal` type has three variants: `#preorder`, `#postorder`, `#inorder` corresponding to the three aforementioned traversal strategies. 
 
 **`iter` implementation details:**
 
