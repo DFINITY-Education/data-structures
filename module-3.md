@@ -26,6 +26,8 @@ A `Tree` can also be a `#leaf`, which is essentially a `NULL` value in that it c
 
 We will get to the `Traversal` type later once we've reviewed more code, but suffice to say that it can be either a `preorder`, `postorder`, or `inorder`. 
 
+As is the case in [Module 2](/module-2.md#code-understanding)'s `BloomFilter`, `Tree` type takes advantage of **generic types**, represented by `X` and `Y`, which allows the BST implementation to remain type agnostic. More specifically, this means that the `Tree` and its related functions don't care if the items entered into it are of type `Text`, `Nat`, `Int`, etc. When you create a new `BST`, you specify the two types that the `BST` will handle. In this case, `X` represents the type for `key`s while `Y` represents the type for `value`s. All subsequent keys and values must match these two types, respectively. See `Main.mo` for an example of how one fills in these generic types with more specific ones!
+
 #### `BST.mo`  
 
 In `BST.mo` we provide the actual implementation for our BST. Skip the `IterRep` type for now and turn your attention to `validate`. `validate` takes a `Tree` as an argument and returns a boolean indicating whether the given `Tree` is a valid BST - that is, it checks whether all of the left child nodes have `key`s less than their parent nodes and whether the right child nodes are greater. This function recursively checks the entire `Tree` using the helper function `validateAgainstChild`. Go though line by line until you fully understand this function - its general structure and recursive nature will help you think about how you can implement the other functions.
@@ -99,5 +101,34 @@ As we previously saw in `Main.mo`, the `Traversal` type has three variants: `#pr
 * Each of the three function you're implementing, `get`, `put`, and `iter`, are independent from each other and increase in difficulty. Start with `get` and then move through `put` and `iter`. If, however, you can't complete one function, you can still implement the others and get a partially functioning BST.
 
 ### Testing
+
+As you progress through your implementation of the BST, you can periodically self-test your work using the command line interface (CLI) after you've built and deployed the corresponding canisters.
+
+Inputing variant types into the CLI can be a bit unintuitive at first, so here is a quick guide to doing so. Image you have the following variant type:
+
+```
+type Custom = {
+  #first;
+  #second;
+  #third;
+}
+```
+
+and a method:
+
+```
+// canister: main
+actor {
+  func Foo(arg1: Custom) {...};
+}
+```
+
+This is how you call it via the CLI:
+
+```
+dfx canister call main Foo '(variant { first })'
+```
+
+Using this method, you should be able to run some basic tests on your implementation to aid in debugging.
 
 **----TO BE IMPLEMENTED----**

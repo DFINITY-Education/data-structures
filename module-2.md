@@ -28,7 +28,9 @@ Let's begin by taking a look at `BloomFilter.mo`. You'll see the `BloomFilter` c
 
 The first several lines of the `BloomFilter` class setup the optimal number (and size of) the slots in the `bitMap`, implemented as an `Array` of booleans initialized to `false`. `hashFuncs` contains all of the hash functions that will be used (the number of which also influences the false-positive error rate).
 
-`Main.mo` just sets up a `bloomFilter` and provides two functions, `bfAdd` and `bfCheck`, that you can use to test your implementation "on the go" using the command-line interface.
+The `BloomFilter` takes advantage of **generic types**, represented by `S`, which allows the BloomFilter implementation to remain type agnostic. More specifically, this means that the `BloomFilter` and its related methods don't care if the items entered into it are of type `Text`, `Nat`, `Int`, etc. When you instantiate a new `BloomFilter` object, you specify a type that the `BloomFilter` will handle. All subsequent items must be of this same type.
+
+`Main.mo` just sets up a `BloomFilter` and provides two functions, `bfAdd` and `bfCheck`, that you can use to test your implementation "on the go" using the command-line interface. Notice that these methods provide a specific type, `Nat`, that this specific instantiation of the `BloomFilter` will use.
 
 ### Specification
 
@@ -47,5 +49,34 @@ The first several lines of the `BloomFilter` class setup the optimal number (and
 *Hint:* Both `add` and `check` only require 3-4 lines of code to implement fully - most of this is practice understanding the inner workings of a Bloom filter and Motoko syntax. 
 
 ### Testing
+
+As you progress through your implementation of the Bloom filter, you can periodically self-test your work using the command line interface (CLI) after you've built and deployed the corresponding canisters.
+
+Inputing variant types into the CLI can be a bit unintuitive at first, so here is a quick guide to doing so. Image you have the following variant type:
+
+```
+type Custom = {
+  #first;
+  #second;
+  #third;
+}
+```
+
+and a method:
+
+```
+// canister:main
+actor {
+  func Foo(arg1: Custom) {...};
+}
+```
+
+This is how you call it via the CLI:
+
+```
+dfx canister call main Foo '(variant { first })'
+```
+
+Using this method, you should be able to run some basic tests on your implementation to aid in debugging.
 
 **----TO BE IMPLEMENTED----**
