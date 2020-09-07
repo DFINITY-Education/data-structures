@@ -14,6 +14,11 @@ module {
 
   type IterRep<X, Y> = List.List<{ #tree: Tree<X, Y>; #kv: (X, Y); }>;
 
+  /// Determines whether a given Tree is a valid BST.
+  /// Args:
+  ///   |t|   The Tree to be validated.
+  /// Returns:
+  ///   A boolean representing whether |t| is a valid BST.
   public func validate<X, Y>(t: Tree<X, Y>) : Bool {
     func validateAgainstChild<X, Y>(parentKey: X, child: Tree<X, Y>, expected: Order) : Bool {
       switch (child) {
@@ -38,6 +43,13 @@ module {
     }
   };
 
+  /// Determines whether a given Tree is a valid BST.
+  /// Args:
+  ///   |t|     The Tree to be searched.
+  ///   |key|   The key being serched for.
+  /// Returns:
+  ///   The value of the node in |t| that has key=|key|.
+  ///   Null if there is no such node in |t|.
   public func get<X, Y>(t: Tree<X, Y>, key: X) : ?Y {
     switch (t) {
       case (#leaf(_)) { null };
@@ -51,6 +63,14 @@ module {
     }
   };
 
+  /// Adds a new node to a tree.
+  /// Args:
+  ///   |t|             The Tree the node is added to.
+  ///   |key|           The key of the new node.
+  ///   |val|           The value of the new node.
+  ///   |compareFunc|   The comparison function associated with the tree.
+  /// Returns:
+  ///   A Tree with the correct node added.
   public func put<X, Y>(t: Tree<X, Y>, key: X, val: Y, compareFunc: (X, X) -> Order) : Tree<X, Y> {
     switch (t) {
       case (#leaf) {
@@ -107,7 +127,13 @@ module {
     };
   };
 
-  // Just hollow out the next() function - leave everything above that for students to have a good base to start from
+  /// Allows for iteration through the Tree nodes
+  /// Args:
+  ///   |t|             The Tree being iterated through.
+  ///   |traversal|     The traversal type - see Types.mo.
+  /// Returns:
+  ///   An Iter object that outputs (key, value) pairs upon subsequent next() method calls.
+  /// Just hollow out the next() function - leave everything above that for students to have a good base to start from
   public func iter<X, Y>(t: Tree<X, Y>, traversal: Types.Traversal) : Iter<X, Y> {
     object {
       var treeIter : IterRep<X, Y> = ?(#tree(t), null);

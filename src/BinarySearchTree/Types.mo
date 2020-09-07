@@ -9,6 +9,7 @@ module {
     #leaf;
   };
 
+  // Specifies a traversal order of the BST - used as an argument for iter() in BST.mo 
   public type Traversal = { #preorder; #postorder; #inorder };
 
 };
