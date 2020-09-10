@@ -1,5 +1,13 @@
 {
   "canisters": {
+    "BigMap": {
+      "main": "third_party/motoko-bigmap/app/Main.mo",
+      "type": "motoko"
+    },
+    "BigMapBloomFilter": {
+      "main": "src/BigMap/Main.mo",
+      "type": "motoko"
+    },
     "BloomFilter": {
       "main": "src/BloomFilter/Main.mo",
       "type": "motoko"

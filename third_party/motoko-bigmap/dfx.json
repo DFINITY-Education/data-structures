@@ -1,0 +1,35 @@
+{
+  "canisters": {
+    "BigMap": {
+        "main": "app/Main.mo"
+    },
+    "BigMapSegment0": {
+        "main": "app/SegCan.mo"
+    },
+    "BigMapSegment1": {
+        "main": "app/SegCan.mo"
+    },
+    "BigMapSegment2": {
+        "main": "app/SegCan.mo"
+    },
+    "BigMapSegment3": {
+        "main": "app/SegCan.mo"
+    },
+    "BigTestPutGet": {
+        "main": "test/BigTestPutGet.mo"
+    },
+    "TestPutGet": {
+        "main": "test/PutGet.mo"
+    }
+  },
+  "defaults": {
+    "build": {
+      "packtool": "vessel sources",
+      "output": "canisters/"
+    },
+    "start": {
+      "address": "127.0.0.1",
+      "port": 8000
+    }
+  }
+}

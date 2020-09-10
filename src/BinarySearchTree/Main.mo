@@ -13,37 +13,37 @@ actor {
   var bstIterator = BST.iter<Nat, Nat>(bst, #inorder);
   let compareFunc = Nat.compare;
 
-  public func bstValidate() : async Bool {
+  public func validate() : async Bool {
     BST.validate(bst)
   };
 
-  public func bstget(key: Nat) : async ?Nat {
+  public func get(key: Nat) : async ?Nat {
     BST.get(bst, key)
   };
 
-  public func bstPut(key: Nat, value: Nat) {
+  public func put(key: Nat, value: Nat) {
     bst := BST.put<Nat, Nat>(bst, key, value, compareFunc);
   };
 
-  public func bstIter(traversal: Types.Traversal) {
+  public func iterSync(traversal: Types.Traversal) {
     bstIterator := BST.iter<Nat, Nat>(bst, traversal);
   };
 
-  public func bstNext() : async ?(Nat, Nat) {
+  public func next() : async ?(Nat, Nat) {
     bstIterator.next()
   };
 
-  public func bstHeight() : async Nat {
+  public func height() : async Nat {
     BST.height<Nat, Nat>(bst)
   };
 
-  public func bstSize() : async Nat {
+  public func size() : async Nat {
     BST.size<Nat, Nat>(bst)
   };
 
   public func bstReset() {
     bst := #leaf;
     bstIterator := BST.iter<Nat, Nat>(bst, #inorder);
-  }
+  };
 
 };

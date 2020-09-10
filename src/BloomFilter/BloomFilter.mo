@@ -4,31 +4,34 @@ import Hash "mo:base/Hash";
 import Int "mo:base/Int";
 import Iter "mo:base/Iter";
 import List "mo:base/List";
-
-// import BM "mo:Bigmap";
+import Nat "mo:base/Nat";
+import Text "mo:base/Text";
+import Word "mo:base/Word32";
 
 module {
 
+  type Hash = Hash.Hash;
+
   // TODO: enforce 0 < errorRate < 1
   // TODO: enfore capacity > 0
-  public class AutoScalingBloomFilter<S>(capacity: Nat, errorRate: Float) {
+  public class AutoScalingBloomFilter<S>(capacity: Nat, errorRate: Float, hashFunc: (S) -> Hash) {
 
     var filters: [BloomFilter<S>] = [];
 
-    var count = 0;
     let numSlices = Float.ceil(Float.log(1.0 / errorRate));
     let bitsPerSlice = Float.ceil(
           (Float.fromInt(capacity) * Float.abs(Float.log(errorRate))) /
           (numSlices * (Float.log(2) ** 2)));
     let bitMapSize: Nat = Int.abs(Float.toInt(numSlices * bitsPerSlice));
     // TODO: add hashfunctions here
-    var hashFuncs: [(S) -> Nat] = [];
+    var hashFuncs: [(S) -> Hash] = [hashFunc];
 
+    // TODO: scenario where duplicate items are added?
     public func add(item: S) {
       var filter = BloomFilter(bitMapSize, hashFuncs);
-      if (not List.isNil<BloomFilter<S>>(List.fromArray<BloomFilter<S>>(filters))) {
+      if (filters.size() > 0) {
         let last_filter = filters[filters.size() - 1];
-        if (last_filter.numItems > capacity) {
+        if (last_filter.getNumItems() > capacity) {
           filter := last_filter;
         };
       };
@@ -43,19 +46,22 @@ module {
       false
     };
 
-    // TODO: implement me
-    func getHashFuncs(numBits: Nat) {};
-
   };
 
-  public class BloomFilter<S>(bitMapSize: Nat, hashFuncs: [(S) -> Nat]) {
+  public func constructWithData<S>(bitMapSize: Nat, hashFuncs: [(S) -> Hash], data: [Bool]) : BloomFilter<S> {
+    let filter = BloomFilter<S>(bitMapSize, hashFuncs);
+    filter.setData(data);
+    filter
+  };
 
-    public var numItems = 0;
+  public class BloomFilter<S>(bitMapSize: Nat, hashFuncs: [(S) -> Hash]) {
+
+    var numItems = 0;
     let bitMap: [var Bool] = Array.init<Bool>(bitMapSize, false);
 
     public func add(item: S) {
       for (f in Iter.fromArray(hashFuncs)) {
-        let digest = f(item) % bitMapSize;
+        let digest = Word.toNat(f(item)) % bitMapSize;
         bitMap[digest] := true;
       };
       numItems += 1;
@@ -63,10 +69,21 @@ module {
 
     public func check(item: S) : Bool {
       for (f in Iter.fromArray(hashFuncs)) {
-        let digest = f(item) % bitMapSize;
+        let digest = Word.toNat(f(item)) % bitMapSize;
         if (bitMap[digest] == true) return false;
       };
       true
+    };
+
+    public func getNumItems() : Nat {
+      numItems
+    };
+
+    public func setData(data: [Bool]) {
+      assert data.size() == bitMapSize;
+      for (i in Iter.range(0, data.size())) {
+        bitMap[i] := data[i];
+      };
     };
 
   };
