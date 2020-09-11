@@ -23,17 +23,16 @@ module {
           (Float.fromInt(capacity) * Float.abs(Float.log(errorRate))) /
           (numSlices * (Float.log(2) ** 2)));
     let bitMapSize: Nat = Int.abs(Float.toInt(numSlices * bitsPerSlice));
-    // TODO: add hashfunctions here
     var hashFuncs: [(S) -> Hash] = [hashFunc];
 
-    public func add(key: Word8, item: S) : async () {
+    public func add(key: [Word8], item: S) : async () {
       let filterOpt = await BigMap.get(key);
       let filter = switch (filterOpt) {
         case (null) { BloomFilter.BloomFilter<S>(bitMapSize, hashFuncs) };
-        case (?data) { BloomFilter.constructWithData<S>(capacity, errorRate, data) };
+        case (?data) { BloomFilter.constructWithData<S>(capacity, hashFuncs, Utils.unhash(data)) };
       };
       filter.add(item);
-      await BigMap.put(filter.hash());
+      await BigMap.put(key, Utils.hash(filter.getBitMap()));
     };
 
     public func check(key: Word8, item: S) : async Bool {
@@ -41,7 +40,7 @@ module {
       switch (filterOpt) {
         case (null) { false };
         case (?data) {
-          let filter = BloomFilter.constructWithData<S>(capacity, errorRate, data);
+          let filter = BloomFilter.constructWithData<S>(capacity, hashFuncs, Utils.unhash(data));
           if (filter.check(item)) { return true; };
           false
         };

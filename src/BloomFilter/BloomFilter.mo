@@ -23,7 +23,6 @@ module {
           (Float.fromInt(capacity) * Float.abs(Float.log(errorRate))) /
           (numSlices * (Float.log(2) ** 2)));
     let bitMapSize: Nat = Int.abs(Float.toInt(numSlices * bitsPerSlice));
-    // TODO: add hashfunctions here
     var hashFuncs: [(S) -> Hash] = [hashFunc];
 
     // TODO: scenario where duplicate items are added?
@@ -77,6 +76,10 @@ module {
 
     public func getNumItems() : Nat {
       numItems
+    };
+
+    public func getBitMap() : [Bool] {
+      Array.freeze(bitMap)
     };
 
     public func setData(data: [Bool]) {
