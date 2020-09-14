@@ -1,6 +1,7 @@
 import Array "mo:base/Array"; 
-import Nat "mo:base/Nat";
+import Nat8 "mo:base/Nat8";
 import Text "mo:base/Text";
+import Word8 "mo:base/Word8";
 
 module {
 
@@ -10,6 +11,14 @@ module {
 
   public func unhash(hashedData: [Word8]) : [Bool] {
     Array.map(hashedData, func (w: Word8) : Bool { switch(w) { case (1) { true }; case (_) { false }; }} )
+  };
+
+  public func convertNat8ToWord8(n: Nat8) : Word8 {
+    Word8.fromNat(Nat8.toNat(n))
+  };
+
+  public func convertWord8ToNat8(w: Word8) : Nat8 {
+    Nat8.fromNat(Word8.toNat(w))
   };
 
 };

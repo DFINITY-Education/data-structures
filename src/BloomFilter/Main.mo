@@ -10,7 +10,7 @@ actor {
     bloomFilter.add(item);
   };
 
-  public func check(item: Nat) : async Bool {
+  public func check(item: Nat) : async (Bool) {
     bloomFilter.check(item)
   };
 
