@@ -1,9 +1,14 @@
 import Array "mo:base/Array"; 
+import Hash "mo:base/Hash";
 import Nat8 "mo:base/Nat8";
 import Text "mo:base/Text";
 import Word8 "mo:base/Word8";
 
+import BloomFilter "../BloomFilter/BloomFilter";
+
 module {
+
+  type Hash = Hash.Hash;
 
   public func hash(filterData: [Bool]) : [Word8] {
     Array.map(filterData, func (b: Bool) : Word8 { switch(b) { case (true) { 1 }; case (false) { 0 }; }} )
@@ -19,6 +24,12 @@ module {
 
   public func convertWord8ToNat8(w: Word8) : Nat8 {
     Nat8.fromNat(Word8.toNat(w))
+  };
+
+  public func constructWithData<S>(bitMapSize: Nat, hashFuncs: [(S) -> Hash], data: [Bool]) : BloomFilter<S> {
+    let filter = BloomFilter.BloomFilter<S>(bitMapSize, hashFuncs);
+    filter.setData(data);
+    filter
   };
 
 };

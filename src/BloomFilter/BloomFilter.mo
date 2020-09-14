@@ -3,9 +3,7 @@ import Float "mo:base/Float";
 import Hash "mo:base/Hash";
 import Int "mo:base/Int";
 import Iter "mo:base/Iter";
-import List "mo:base/List";
 import Nat "mo:base/Nat";
-import Text "mo:base/Text";
 import Word "mo:base/Word32";
 
 module {
@@ -30,7 +28,7 @@ module {
       var filter = BloomFilter(bitMapSize, hashFuncs);
       if (filters.size() > 0) {
         let last_filter = filters[filters.size() - 1];
-        if (last_filter.getNumItems() > capacity) {
+        if (last_filter.getNumItems() < capacity) {
           filter := last_filter;
         };
       };
@@ -45,12 +43,6 @@ module {
       false
     };
 
-  };
-
-  public func constructWithData<S>(bitMapSize: Nat, hashFuncs: [(S) -> Hash], data: [Bool]) : BloomFilter<S> {
-    let filter = BloomFilter<S>(bitMapSize, hashFuncs);
-    filter.setData(data);
-    filter
   };
 
   public class BloomFilter<S>(bitMapSize: Nat, hashFuncs: [(S) -> Hash]) {

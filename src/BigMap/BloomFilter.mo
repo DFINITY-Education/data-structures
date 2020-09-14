@@ -2,8 +2,6 @@ import Array "mo:base/Array";
 import Float "mo:base/Float";
 import Hash "mo:base/Hash";
 import Int "mo:base/Int";
-import Iter "mo:base/Iter";
-import List "mo:base/List";
 
 import BigMap "canister:BigMap";
 
@@ -29,7 +27,7 @@ module {
       let filterOpt = await BigMap.get([Utils.convertWord8ToNat8(key)]);
       let filter = switch (filterOpt) {
         case (null) { BloomFilter.BloomFilter<S>(bitMapSize, hashFuncs) };
-        case (?data) { BloomFilter.constructWithData<S>(capacity, hashFuncs, Utils.unhash(Array.map(data, Utils.convertNat8ToWord8))) };
+        case (?data) { Utils.constructWithData<S>(capacity, hashFuncs, Utils.unhash(Array.map(data, Utils.convertNat8ToWord8))) };
       };
       filter.add(item);
       await BigMap.put([Utils.convertWord8ToNat8(key)], Array.map(Utils.hash(filter.getBitMap()), Utils.convertWord8ToNat8));
@@ -40,7 +38,7 @@ module {
       switch (filterOpt) {
         case (null) { false };
         case (?data) {
-          let filter = BloomFilter.constructWithData<S>(capacity, hashFuncs, Utils.unhash(Array.map(data, Utils.convertNat8ToWord8)));
+          let filter = Utils.constructWithData<S>(capacity, hashFuncs, Utils.unhash(Array.map(data, Utils.convertNat8ToWord8)));
           if (filter.check(item)) { return true; };
           false
         };
