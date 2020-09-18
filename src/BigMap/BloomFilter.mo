@@ -13,6 +13,11 @@ module {
   type BloomFilter<S> = BloomFilter.BloomFilter<S>;
   type Hash = Hash.Hash;
 
+  /// Manages BloomFilters, deploys new BloomFilters, and checks for element membership across filters.
+  /// Args:
+  ///   |capacity|    The maximum number of elements a BlooomFilter may store.
+  ///   |errorRate|   The maximum false positive rate a BloomFilter may maintain.
+  ///   |hashFuncs|   The hash functions used to hash elements into the filter.
   public class BigMapBloomFilter<S>(capacity: Nat, errorRate: Float, hashFuncs: [(S) -> Hash]) {
 
     let numSlices = Float.ceil(Float.log(1.0 / errorRate));
@@ -21,6 +26,10 @@ module {
           (numSlices * (Float.log(2) ** 2)));
     let bitMapSize: Nat = Int.abs(Float.toInt(numSlices * bitsPerSlice));
 
+    /// Adds an element to the BloomFilter's bitmap and deploys new BloomFilter if previous is at capacity.
+    /// Args:
+    ///   |key|    The key associated with the particular item (used with BigMap).
+    ///   |item|   The item to be added.
     public func add(key: Word8, item: S) : async () {
       let filterOpt = await BigMap.get([Utils.convertWord8ToNat8(key)]);
       let filter = switch (filterOpt) {
@@ -31,6 +40,12 @@ module {
       await BigMap.put([Utils.convertWord8ToNat8(key)], Array.map(Utils.serialize(filter.getBitMap()), Utils.convertWord8ToNat8));
     };
 
+    /// Checks if an item is contained in any BloomFilters
+    /// Args:
+    ///   |key|    The key associated with the particular item (used with BigMap).
+    ///   |item|   The item to be searched for.
+    /// Returns:
+    ///   A boolean indicating set membership.
     public func check(key: Word8, item: S) : async (Bool) {
       let filterOpt = await BigMap.get([Utils.convertWord8ToNat8(key)]);
       switch (filterOpt) {
