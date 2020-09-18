@@ -24,11 +24,23 @@ In this exercise, you will implement a Bloom filter like the one described above
 
 ### Code Understanding
 
-Let's begin by taking a look at `BloomFilter.mo`. You'll see the `BloomFilter` class, which accepts two parameters: a `capacity` and `errorRate`. The `capacity` represents the number of elements you want the bitmap to store **-----UPDATE-----** and the `errorRate` is the max false-positive rate the Bloom filter should allow. It will auto-scale to maintain a consistent error rate. 
+#### `BloomFilter.mo`
 
-The first several lines of the `BloomFilter` class setup the optimal number (and size of) the slots in the `bitMap`, implemented as an `Array` of booleans initialized to `false`. `hashFuncs` contains all of the hash functions that will be used (the number of which also influences the false-positive error rate).
+Let's begin by taking a look at `BloomFilter.mo`. You'll see two classes: `AutoScalingBloomFilter` and `BloomFilter`. We mentioned previously how the false-positive rate in Bloom filters increases as you store more elements in them. To enable our Bloom filter to maintain a consistent error rate, we will store a list of Bloom filters, where a new Bloom filter is created when an old filter reaches its maximum tolerated false-positive rate. `AutoScalingBloomFilter` manages our list of Bloom filters, deploys new Bloom filters, and searches through the list of filters when a user checks for membership. `BloomFilter` is the class used to create each individual Bloom filter - this is the part that you'll be finishing the implementation for. 
+
+The `AutoScalingBloomFilter` class accepts three parameters: a `capacity`, an `errorRate`, and `hashFuncs`. The `capacity` represents the number of elements you want the bitmap to store and the `errorRate` is the max false-positive rate the Bloom filter should allow. `hashFuncs` is a list of the hash functions used for all Bloom filters.
+
+The first several lines of the `AutoScalingBloomFilter` class set up the optimal number (and size of) the slots in `BloomFilter`'s `bitMap`. `filters` maintains a list of all the Bloom filters, and `hashFuncs` contains all of the hash functions that will be used (the number of which also influences the false-positive error rate).
+
+The `add` function adds an `item` to our data structure; this is where the auto-scaling occurs. If a given `BloomFilter` has reached its capacity, a new one is created with the `item` and appended to the list. Notice that we call `BloomFilter`'s own `add` function to add an `item` to that specific `BloomFilter`.
+
+`check` runs though all of the Bloom filters in `filters` and calls the `BloomFilter.check` function on them. 
+
+The `BloomFilter` class accepts two parameters: `bitMapSize` and `hashFuncs`. The `bitMapSize` is the size of our bitmap, as determined by the math in `AutoScalingBloomFilter`. You can see it used in creating our `bitMap`, which is implemented as an `Array` of booleans initialized to `false`. `BloomFilter` has no notion of `capacity` or `errorRate` - the `AutoScalingBloomFilter` class is responsible for managing those factors. 
 
 The `BloomFilter` takes advantage of **generic types**, represented by `S`, which allows the BloomFilter implementation to remain type agnostic. More specifically, this means that the `BloomFilter` and its related methods don't care if the items entered into it are of type `Text`, `Nat`, `Int`, etc. When you instantiate a new `BloomFilter` object, you specify a type that the `BloomFilter` will handle. All subsequent items must be of this same type.
+
+#### `Main.mo`
 
 `Main.mo` just sets up a `BloomFilter` and provides two functions, `bfAdd` and `bfCheck`, that you can use to test your implementation "on the go" using the command-line interface. Notice that these methods provide a specific type, `Nat`, that this specific instantiation of the `BloomFilter` will use.
 
@@ -78,5 +90,3 @@ dfx canister call main Foo '(variant { first })'
 ```
 
 Using this method, you should be able to run some basic tests on your implementation to aid in debugging.
-
-**----TO BE IMPLEMENTED----**

@@ -2,13 +2,17 @@
 
 ## Outline
 
-* Tradeoffs in data structure design
-  * Linked List vs Array
-  * Common Data Structures
-* Data structures in Motoko
-  * Pure vs Object-Oriented
-  * Migration and Upgrading Canisters
-  * Bigmap
+1. [Tradeoffs in data structure design](#tradeoffs-in-traditional-data-structures)
+
+   * [Linked List vs Array](#linked-list-vs-array)
+
+   * [Common Data Structures](#common-data-structures)
+
+2. [Data structures in Motoko](#data-structures-in-motoko)
+
+   * [Pure vs Object-Oriented](#pure-vs-object-oriented)
+   * [Migration and Upgrading Canisters](#Migration-and-Upgrading-Canisters)
+   * [Bigmap](#bigmap)
 
 ## Tradeoffs in Traditional Data Structures
 

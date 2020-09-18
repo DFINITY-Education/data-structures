@@ -128,5 +128,3 @@ dfx canister call main Foo '(variant { first })'
 ```
 
 Using this method, you should be able to run some basic tests on your implementation to aid in debugging.
-
-**----TO BE IMPLEMENTED----**
