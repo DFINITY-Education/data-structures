@@ -12,7 +12,7 @@ module {
 
   // TODO: enforce 0 < errorRate < 1
   // TODO: enfore capacity > 0
-  public class AutoScalingBloomFilter<S>(capacity: Nat, errorRate: Float, hashFunc: (S) -> Hash) {
+  public class AutoScalingBloomFilter<S>(capacity: Nat, errorRate: Float, hashFuncs: [(S) -> Hash]) {
 
     var filters: [BloomFilter<S>] = [];
 
@@ -21,7 +21,6 @@ module {
           (Float.fromInt(capacity) * Float.abs(Float.log(errorRate))) /
           (numSlices * (Float.log(2) ** 2)));
     let bitMapSize: Nat = Int.abs(Float.toInt(numSlices * bitsPerSlice));
-    var hashFuncs: [(S) -> Hash] = [hashFunc];
 
     // TODO: scenario where duplicate items are added?
     public func add(item: S) {

@@ -8,6 +8,7 @@ import BloomFilter "../BloomFilter/BloomFilter";
 
 module {
 
+  type BloomFilter<S> = BloomFilter.BloomFilter<S>;
   type Hash = Hash.Hash;
 
   public func hash(filterData: [Bool]) : [Word8] {

@@ -13,15 +13,13 @@ module {
   type BloomFilter<S> = BloomFilter.BloomFilter<S>;
   type Hash = Hash.Hash;
 
-  public class BigMapBloomFilter<S>(capacity: Nat, errorRate: Float, hashFunc: (S) -> Hash) {
+  public class BigMapBloomFilter<S>(capacity: Nat, errorRate: Float, hashFuncs: [(S) -> Hash]) {
 
-    var count = 0;
     let numSlices = Float.ceil(Float.log(1.0 / errorRate));
     let bitsPerSlice = Float.ceil(
           (Float.fromInt(capacity) * Float.abs(Float.log(errorRate))) /
           (numSlices * (Float.log(2) ** 2)));
     let bitMapSize: Nat = Int.abs(Float.toInt(numSlices * bitsPerSlice));
-    var hashFuncs: [(S) -> Hash] = [hashFunc];
 
     public func add(key: Word8, item: S) : async () {
       let filterOpt = await BigMap.get([Utils.convertWord8ToNat8(key)]);
