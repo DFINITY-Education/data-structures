@@ -1,3 +1,0 @@
-[submodule "third_party/motoko-sha"]
-	path = third_party/motoko-sha
-	url = https://github.com/enzoh/motoko-sha
