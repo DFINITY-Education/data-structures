@@ -1,8 +1,4 @@
-[
-  {
-    "name": "SHA256",
-    "repo": "https://github.com/enzoh/motoko-sha",
-    "version": "master",
-    "dependencies": ["base"]
-  }
-]
+{
+  dependencies = [ "base", "motoko-sha" ],
+  compiler = Some "0.4.2"
+}

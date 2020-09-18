@@ -10,6 +10,9 @@
 # dfx temporary files
 .dfx/
 
+# vessel temporary files
+.vessel/
+
 # frontend code
 node_modules/
 dist/

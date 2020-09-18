@@ -1,0 +1,1 @@
+`motoko-bigmap` was written by Matthew Hammer and is CC Dfinity.

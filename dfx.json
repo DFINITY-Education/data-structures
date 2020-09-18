@@ -1,7 +1,7 @@
 {
   "canisters": {
     "BigMap": {
-      "main": "third_party/motoko-bigmap/app/Main.mo",
+      "main": "vendor/motoko-bigmap/app/Main.mo",
       "type": "motoko"
     },
     "BigMapBloomFilter": {
@@ -19,10 +19,10 @@
   },
   "defaults": {
     "build": {
-      "packtool": ""
+      "packtool": "vessel sources"
     }
   },
-  "dfx": "0.6.1",
+  "dfx": "0.6.7",
   "networks": {
     "local": {
       "bind": "127.0.0.1:8000",

@@ -2,7 +2,7 @@ import T "Types";
 import Array "mo:base/Array";
 import P "mo:base/Prelude";
 import Order "Order"; // TEMP
-import SHA256 "../../motoko-sha/src/SHA256";
+import SHA256 "mo:motoko-sha/SHA256";
 import Prim "mo:prim";
 import Debug "DebugOff";
 //import Debug "mo:base/Debug";

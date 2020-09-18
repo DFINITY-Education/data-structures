@@ -11,12 +11,12 @@ module {
   type BloomFilter<S> = BloomFilter.BloomFilter<S>;
   type Hash = Hash.Hash;
 
-  public func hash(filterData: [Bool]) : [Word8] {
+  public func serialize(filterData: [Bool]) : [Word8] {
     Array.map(filterData, func (b: Bool) : Word8 { switch(b) { case (true) { 1 }; case (false) { 0 }; }} )
   };
 
-  public func unhash(hashedData: [Word8]) : [Bool] {
-    Array.map(hashedData, func (w: Word8) : Bool { switch(w) { case (1) { true }; case (_) { false }; }} )
+  public func unserialize(serializedData: [Word8]) : [Bool] {
+    Array.map(serializedData, func (w: Word8) : Bool { switch(w) { case (1) { true }; case (_) { false }; }} )
   };
 
   public func convertNat8ToWord8(n: Nat8) : Word8 {
