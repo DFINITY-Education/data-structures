@@ -5,7 +5,6 @@
 1. [Tradeoffs in data structure design](#tradeoffs-in-traditional-data-structures)
 
    * [Linked List vs Array](#linked-list-vs-array)
-
    * [Common Data Structures](#common-data-structures)
 
 2. [Data structures in Motoko](#data-structures-in-motoko)
