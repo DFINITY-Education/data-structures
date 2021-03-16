@@ -19,7 +19,7 @@ module {
 
     var filters: [BloomFilter<S>] = [];
 
-    let numSlices = Float.ceil(Float.log(1.0 / errorRate));
+    let numSlices = Float.ceil(Float.log(1.0 / errorRate)/Float.log(2));
     let bitsPerSlice = Float.ceil(
           (Float.fromInt(capacity) * Float.abs(Float.log(errorRate))) /
           (numSlices * (Float.log(2) ** 2)));
