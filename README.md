@@ -6,3 +6,9 @@
 
 # About
 In this course, students will learn about the foundational elements of data structures as well as how they work on the Internet Computer. Module 1 serves as an intro to this unit, providing context for data structure design and the tradeoffs to consider when weighing which to use in certain projects. Module 2 and 3 explore the distinction between Motoko's differing styles for writing data structures: object-oriented (collection of functions that mutate state), and pure (no methods, no mutations). Module 4 builds on the data structures explored so far. Students will get hands-on experience via the IC's `BigMap` library, learning to scale their data structures beyond a single canister in the process.
+
+# Content
+The provided content was developed in collaboration with the following students:
+
+- [Nick Zoghb](https://www.linkedin.com/in/nickzoghb/), a graduate of University of California, Berkeley (2018) with a focus on Computer Science and Bioengineering
+- [Connor Solimano](https://www.linkedin.com/in/connor-solimano/), a student at Harvard College (2022) pursuing a degree in Computer Science and Economics
