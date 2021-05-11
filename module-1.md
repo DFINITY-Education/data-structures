@@ -23,17 +23,17 @@ One common tradeoff exhibited in many data structures is that between **memory**
 
 To better understand the aforementioned tradeoff between memory and lookup time, consider the characteristics of **arrays** compared to **linked lists**. An **array** is a fixed-length data structure with constant [O(1)] lookup time. Once an array of a specified size is created, you can't increase its capacity without creating an entirely new array. As a result, the tradeoff for this superb lookup time is reduced flexibility (making arrays poor for dynamically growing/shrinking databases) and increased memory required (you may need to allocate more space than needed to memory if unsure of the exact size required).
 
-<img src="images/array.png" alt="Array" width="400"/>
+<p align="center"> <img src="images/array.png" alt="Array" width="400"/> </p>
 
-<center>https://dzone.com/articles/data-structures-and-their-applications</center>
+<p align="center"> <i>Array indices. Source: <a href="https://dzone.com/articles/data-structures-and-their-applications">Dzone</a></i></p>
 
 Conversely, a **linked list** is a dynamically-sized data structure consisting of many nodes, each of which contains a specified data value and a pointer to the next node in the list. If you want to add a new element to the list, you just add a new pointer to the structure. The tradeoff for this increased flexibility, however, is that the lookup time is **O(n)**. This is because if you want to find the data value at the last node in the list, you must first traverse the entire linked list. The head (first node) of the linked list is typically the only location that's directly stored; all other node locations are stored in the preceding node.
 
-Tradeoffs may also exist in the insertion or deletion time of a given data structure. These times depend of the form of insertion/deletion that takes place. For example, inserting at the beginning of a linked list is **O(1)**, whereas inserting at element at the end of the linked list is **O(n)**.
+Tradeoffs may also exist in the insertion or deletion time of a given data structure. These times depend on the form of insertion/deletion that takes place. For example, inserting at the beginning of a linked list is **O(1)**, whereas inserting an element at the end of the linked list is **O(n)**.
 
-![Linked List](images/Singly-linked-list.svg)
+<p align="center"> <img src="images/Singly-linked-list.svg" width="400"/> </p>
 
-<center>https://en.wikipedia.org/wiki/Linked_list#/media/File:Singly-linked-list.svg</center>
+<p align="center"> <i>Singly linked lists. Source: <a href="https://en.wikipedia.org/wiki/Linked_list#/media/File:Singly-linked-list.svg">Linked List Wiki</a></i></p>
 
 ### Common Data Structures
 
@@ -43,19 +43,19 @@ A **hash table** is a data structure consisting of an array and corresponding li
 
 This, however, creates a problem: what happens when two distinct names result in the same index? This is bound to happen when the number of data values exceeds the size of the fixed array. Such an event, called a **collision**, is resolved by forming a linked list at that array index. In the diagram below, "Sandra Dee" hashes to the same index, 152, as "John Smith." As a result, the "John Smith" result just points to the location of "Sandra Dee" in the linked list, which can then be traversed to find the stored value for "John Smith".
 
-![Hash Table](images/hash-table.svg)
+<p align="center"> <img src="images/hash-table.svg"/> </p>
+<p align="center"> <i>Hashing names to indices in a hash table. Source: <a href="https://en.wikipedia.org/wiki/Hash_table#/media/File:Hash_table_5_0_1_1_1_1_0_LL.svg"> Hash Table Wiki</a></i></p>
+<center></center>
 
-<center>https://en.wikipedia.org/wiki/Hash_table#/media/File:Hash_table_5_0_1_1_1_1_0_LL.svg</center>
-
-Hash tables are especially useful because they offer both dynamically-sized data storage while also maintaining fast lookup times. In this case, the essential tradeoff is between array size (memory) and lookup speed. A smaller array requires less up-front memory to be allocated, but it results is a greater number of collisions. As a result, one must traverse each linked list for a given index to find the desired value. Larger arrays result in fewer collisions, allowing for near-constant lookup times, but require more up-front memory.
+Hash tables are especially useful because they offer both dynamically-sized data storage while also maintaining fast lookup times. In this case, the essential tradeoff is between array size (memory) and lookup speed. A smaller array requires less up-front memory to be allocated, but it results in a greater number of collisions. As a result, one must traverse each linked list for a given index to find the desired value. Larger arrays result in fewer collisions, allowing for near-constant lookup times, but require more up-front memory.
 
 #### Binary Search Tree
 
- A Binary search tree is a data structure in which each node points to two other nodes. These values are organized such that every node to the left of a given node is a smaller value, while every node to the right is a larger value. This allows for **O(log n)** search and insertion time as one traverses each "level" of the tree. Binary search trees provide quicker search than linked lists but do not preserve the insertion order of elements.
+A Binary search tree is a data structure in which each node points to two other nodes. These values are organized such that every node to the left of a given node is a smaller value, while every node to the right is a larger value. This allows for **O(log n)** search and insertion time as one traverses each "level" of the tree. Binary search trees provide quicker search than linked lists but do not preserve the insertion order of elements.
 
-![Binary Search Tree](images/Binary_search_tree.svg)
-
-<center>https://en.wikipedia.org/wiki/Binary_search_tree#/media/File:Binary_search_tree.svg </center>
+<p align="center"> <img src="images/Binary_search_tree.svg"/> </p>
+<p align="center"> <i>Left-aligned minimum binary search tree. Source: <a href="https://en.wikipedia.org/wiki/Binary_search_tree#/media/File:Binary_search_tree.svg"> BST Wiki</a></i></p>
+<center></center>
 
 ## Data Structures in Motoko
 
@@ -76,7 +76,7 @@ Other common examples of pure data structures in Motoko include [AssocList, Trie
 
 There are also several data structures in Motoko that take advantage of object-oriented features, meaning that they associate data and code whose variables contain mutable state. 
 
-[HashMap](https://sdk.dfinity.org/docs/base-libraries/hashmap) is a great example of an object-oriented data structure in Motoko, but it's definition (which includes methods) cannot be written as simply as that of `List`. Other examples of object-oriented data structures in Motoko include [Buffer, TrieMap, and RBTree](https://sdk.dfinity.org/docs/base-libraries/stdlib-intro.html).
+[HashMap](https://sdk.dfinity.org/docs/base-libraries/hashmap) is a great example of an object-oriented data structure in Motoko, but its definition (which includes methods) cannot be written as simply as that of `List`. Other examples of object-oriented data structures in Motoko include [Buffer, TrieMap, and RBTree](https://sdk.dfinity.org/docs/base-libraries/stdlib-intro.html).
 
 ```
 class HashMap<K, V>(initCapacity : Nat, keyEq : (K, K) -> Bool, keyHash : K -> Hash.Hash)
@@ -86,7 +86,7 @@ class HashMap<K, V>(initCapacity : Nat, keyEq : (K, K) -> Bool, keyHash : K -> H
 
 "Upgrading" is a term used to describe how a canister is updated with new code after being deployed on the Internet Computer. As there may be canisters that depend on another canister's specific implementation (e.g. one canister queries a separate database canister), developers on the IC must be careful about which aspects they change in each upgrade, lest they break the functionality of other dependent canisters.
 
-While data structures implemented in the object oriented style are supported within canisters, they shouldn't necessarily be used to send data across canisters or to persist data in canisters that will be upgraded in the future. [Stable](https://sdk.dfinity.org/docs/language-guide/actors-async.html#_stable_and_flexible_variables) data stored within canisters must be first order (like an `Int` or `Text`), meaning that it cannot contain objects. 
+While data structures implemented in the object-oriented style are supported within canisters, they shouldn't necessarily be used to send data across canisters or to persist data in canisters that will be upgraded in the future. [Stable](https://sdk.dfinity.org/docs/language-guide/actors-async.html#_stable_and_flexible_variables) data stored within canisters must be first order (like an `Int` or `Text`), meaning that it cannot contain objects. 
 
 ### BigMap
 
