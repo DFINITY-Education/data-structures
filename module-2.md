@@ -11,10 +11,12 @@ Such a data structure is especially useful in instances where we care more about
 Bloom filters use a **bitmap** as the base data structure. A bitmap is simply an array where each index contains either a 0 or a 1. The filter takes in the value that's being entered into the data structure, hashes it to multiple indices (ranging from 0 to the length - 1 of the bitmap) using several different hash functions, and stores a 1 at that particular index. The beauty of a bloom filter - and the aspect that makes it so space-efficient - is the fact that we don't need to actually store the given element in our set. We simply hash the element, go to the location in our bitmap that is hashes to, and insert a 1 into that spot (or multiple spots if using multiple hash functions).
 
 **Example bitmap with values initialized to 0:**
+<div align="center">
 
 | 0    | 0    | 0    | 0    | 0    | 0    | 0    | 0    | 0    | 0    |
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9    |
+</div>
 
 To test for membership in the set, the program hashes the value being searched using the same aforementioned hash functions. If the resulting values are not in the bitmap, then you know that the element is *not* in the set. If the values are in the bitmap, then all you can conclude is that the element *might be* in the set. You cannot determine if the item exists with certainly because there could be other combinations of different hashed values that overlap with the same bits. Naturally, as you enter more elements into data structure, the bitmap fills up and the probability of producing a false positive increases. [This interactive site](https://llimllib.github.io/bloomfilter-tutorial/) provides a great visual explanation of the mechanics behind bloom filters. 
 
