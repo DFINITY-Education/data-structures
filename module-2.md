@@ -8,7 +8,7 @@ A **Bloom filter** is a probabilistic data structure designed to indicate, with 
 
 Such a data structure is especially useful in instances where we care more about ensuring that an element is definitely not in a set. For instance, when registering a new username, many services aim to quickly indicate whether a given name is already taken.  The cost of a false positive - indicating that a username is already taken when it is actually available - isn't high, so this tradeoff for increased efficiency is worthwhile.
 
-Bloom filters use a **bitmap** as the base data structure. A bitmap is simply an array where each index contains either a 0 or a 1. The filter takes in the value that's being entered into the data structure, hashes it to multiple indices (ranging from 0 to the length - 1 of the bitmap) using several different hash functions, and stores a 1 at that particular index. The beauty of a bloom filter - and the aspect that makes it so space-efficient - is the fact that we don't need to actually store the given element in our set. We simply hash the element, go to the location in our bitmap that is hashes to, and insert a 1 into that spot (or multiple spots if using multiple hash functions).
+Bloom filters use a **bitmap** as the base data structure. A bitmap is simply an array where each index contains either a 0 or a 1. The filter takes in the value that's being entered into the data structure, hashes it to multiple indices (ranging from 0 to the length - 1 of the bitmap) using several different hash functions, and stores a 1 at that particular index. The beauty of a bloom filter - and the aspect that makes it so space-efficient - is the fact that we don't need to actually store the given element in our set. We simply hash the element, go to the location in our bitmap that it hashes to, and insert a 1 into that spot (or multiple spots if using multiple hash functions).
 
 **Example bitmap with values initialized to 0:**
 <div align="center">
@@ -18,7 +18,7 @@ Bloom filters use a **bitmap** as the base data structure. A bitmap is simply an
 | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9    |
 </div>
 
-To test for membership in the set, the program hashes the value being searched using the same aforementioned hash functions. If the resulting values are not in the bitmap, then you know that the element is *not* in the set. If the values are in the bitmap, then all you can conclude is that the element *might be* in the set. You cannot determine if the item exists with certainly because there could be other combinations of different hashed values that overlap with the same bits. Naturally, as you enter more elements into data structure, the bitmap fills up and the probability of producing a false positive increases. [This interactive site](https://llimllib.github.io/bloomfilter-tutorial/) provides a great visual explanation of the mechanics behind bloom filters. 
+To test for membership in the set, the program hashes the value being searched using the same aforementioned hash functions. If the resulting values are not in the bitmap, then you know that the element is *not* in the set. If the values are in the bitmap, then all you can conclude is that the element *might be* in the set. You cannot determine if the item exists with certainty because there could be other combinations of different hashed values that overlap with the same bits. Naturally, as you enter more elements into the data structure, the bitmap fills up and the probability of producing a false positive increases. [This interactive site](https://llimllib.github.io/bloomfilter-tutorial/) provides a great visual explanation of the mechanics behind bloom filters. 
 
 ## Your Task
 
@@ -36,7 +36,7 @@ The first several lines of the `AutoScalingBloomFilter` class set up the optimal
 
 The `add` function adds an `item` to our data structure; this is where the auto-scaling occurs. If a given `BloomFilter` has reached its capacity, a new one is created with the `item` and appended to the list. Notice that we call `BloomFilter`'s own `add` function to add an `item` to that specific `BloomFilter`.
 
-`check` runs though all of the Bloom filters in `filters` and calls each of their `check` class methods.
+`check` runs through all of the Bloom filters in `filters` and calls each of their `check` class methods.
 
 The `BloomFilter` class accepts two parameters: `bitMapSize` and `hashFuncs`. The `bitMapSize` is the size of our bitmap, as determined by the math in `AutoScalingBloomFilter`. You can see it used in creating our `bitMap`, which is implemented as an `Array` of booleans initialized to `false`. `BloomFilter` has no notion of `capacity` or `errorRate` - the `AutoScalingBloomFilter` class is responsible for managing those factors.
 
@@ -52,7 +52,7 @@ The `BloomFilter` takes advantage of **generic types**, represented by `S`, whic
 
 **`add`** simply adds an element to the `bitMap`
 
-* `add` takes one argument, `item`, representing the item it be added to the Bloom Filter, and returns nothing.
+* `add` takes one argument, `item`, representing the item to be added to the Bloom Filter, and returns nothing.
 * Remember that there will likely be more than one hash function stored in `hashFuncs`. You must apply each function in `hashFuncs` to the `item`, updating the boolean at the corresponding index of `bitMap` accordingly.
 
 **`check`** determines if the element is in the `bitMap`
@@ -66,7 +66,7 @@ The `BloomFilter` takes advantage of **generic types**, represented by `S`, whic
 
 As you progress through your implementation of the Bloom filter, you can periodically self-test your work using the command line interface (CLI) after you've built and deployed the corresponding canisters.
 
-Inputing variant types into the CLI can be a bit unintuitive at first, so here is a quick guide to doing so. Image you have the following variant type:
+Inputting variant types into the CLI can be a bit unintuitive at first, so here is a quick guide to doing so. Imagine you have the following variant type:
 
 ```
 type Custom = {
