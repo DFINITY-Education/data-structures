@@ -34,7 +34,7 @@ The `Utils.mo` file contains several helper functions that you may find useful i
 
 **Task:** Complete the implementation of the `add` and `check ` methods in `BloomFilter.mo`.
 
-**`add`** takes in a `key` and a `item` and adds that key, value pair to the `BloomFilter`
+**`add`** takes in a `key` and an `item` and adds that key, value pair to the `BloomFilter`
 
 * Start by understanding the `BigMap` API: `put` and `get`. Their function signatures are as follows:
 ```
@@ -57,7 +57,7 @@ func put(key : [Word8], value : [Word8]) : async ()
 
 As you progress through your implementation of the `BigMapBloomFilter`, you can periodically self-test your work using the command line interface (CLI) after you've built and deployed the corresponding canisters.
 
-Inputing variant types into the CLI can be a bit unintuitive at first, so here is a quick guide to doing so. Image you have the following variant type:
+Inputting variant types into the CLI can be a bit unintuitive at first, so here is a quick guide to doing so. Imagine you have the following variant type:
 
 ```
 type Custom = {
