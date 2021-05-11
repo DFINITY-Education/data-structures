@@ -8,7 +8,7 @@ We briefly discussed **Binary Search Trees** (BST) in [Module 1](/module-1.md#bi
 
 ## Your Task
 
-In this exercise, you will implement a binary search tree like the one described above. This data structure will be built entirely using pure, functional programing paradigms, unlike the object-oriented Bloom filter described in [Module 2](/module-2.md).
+In this exercise, you will implement a binary search tree like the one described above. This data structure will be built entirely using pure, functional programming paradigms, unlike the object-oriented Bloom filter described in [Module 2](/module-2.md).
 
 ### Code Understanding
 
@@ -30,7 +30,7 @@ As is the case in [Module 2](/module-2.md#code-understanding)'s `BloomFilter`, t
 
 #### `BST.mo`  
 
-In `BST.mo` we provide the actual implementation for our BST. Skip the `IterRep` type for now and turn your attention to `validate`. `validate` takes a `Tree` as an argument and returns a boolean indicating whether the given `Tree` is a valid BST - that is, it checks whether all of the left child nodes have `key`s less than their parent nodes and whether the right child nodes are greater. This function recursively checks the entire `Tree` using the helper function `validateAgainstChild`. Go though line by line until you fully understand this function - its general structure and recursive nature will help you think about how you can implement the other functions.
+In `BST.mo` we provide the actual implementation for our BST. Skip the `IterRep` type for now and turn your attention to `validate`. `validate` takes a `Tree` as an argument and returns a boolean indicating whether the given `Tree` is a valid BST - that is, it checks whether all of the left child nodes have `key`s less than their parent nodes and whether the right child nodes are greater. This function recursively checks the entire `Tree` using the helper function `validateAgainstChild`. Go through line by line until you fully understand this function - its general structure and recursive nature will help you think about how you can implement the other functions.
 
 The rest of the functions are either simple (`height` and `size`) or ones that you will implement yourself. 
 
@@ -64,7 +64,7 @@ BSTs, unlike some linear data structures, can be traversed in several different 
 
 * **Postorder** traverses the left child, then the right child, and then the root node
 
-<div style="text-align:center"><img src="images/Binary_search_tree.svg" /></div>
+<div align="center"><img src="images/Binary_search_tree.svg" /></div>
 
 Given the above tree, here's how each of these orders would traverse it:
 
@@ -88,21 +88,21 @@ Feel free to read more about this topic [here](https://www.geeksforgeeks.org/tre
 
 **`iter` implementation details:**
 
-* The `iter` function returns an object of type `Iter` ([Motoko SDK page](https://sdk.dfinity.org/docs/base-libraries/iter)) that can be iterated though by calling a `next` function.
+* The `iter` function returns an object of type `Iter` ([Motoko SDK page](https://sdk.dfinity.org/docs/base-libraries/iter)) that can be iterated through by calling a `next` function.
 * This object maintains an internal state, a `treeIter` of type `IterRep`, and therefore isn't pure. `treeIter` is a variant type that can either be a `#tree` or `#kv`, representing a `Tree` and key/value pair respectively. See the `IterRep` type definition at the top of the `BST.mo` file.
 * Using the object returned from `iter`, you should be able to call the `next()` function (see `bstNext()` in `Main.mo` for an example of this) to iterate one step through the Tree and return the next (key, value) pair.
 
 **Hints:**
 
-* Take a look though `Main.mo` if you're still having trouble understanding how all the pieces of the BST relate. This can get a bit abstract, so it's helpful to see the concrete implementation of our BST using `Nat`s.
+* Take a look through `Main.mo` if you're still having trouble understanding how all the pieces of the BST relate. This can get a bit abstract, so it's helpful to see the concrete implementation of our BST using `Nat`s.
 * Get familiar with `case` and `switch ` statements, because you'll be using them (sometimes multiple times) in all the functions you implement!
-* Each of the three function you're implementing, `get`, `put`, and `iter`, are independent from each other and increase in difficulty. Start with `get` and then move through `put` and `iter`. If, however, you can't complete one function, you can still implement the others and get a partially functioning BST.
+* Each of the three functions you're implementing, `get`, `put`, and `iter`, are independent from each other and increase in difficulty. Start with `get` and then move through `put` and `iter`. If, however, you can't complete one function, you can still implement the others and get a partially functioning BST.
 
 ### Testing
 
 As you progress through your implementation of the BST, you can periodically self-test your work using the command line interface (CLI) after you've built and deployed the corresponding canisters.
 
-Inputing variant types into the CLI can be a bit unintuitive at first, so here is a quick guide to doing so. Image you have the following variant type:
+Inputting variant types into the CLI can be a bit unintuitive at first, so here is a quick guide to doing so. Imagine you have the following variant type:
 
 ```
 type Custom = {
