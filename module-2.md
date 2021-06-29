@@ -63,6 +63,7 @@ The `BloomFilter` takes advantage of **generic types**, represented by `S`, whic
 *Hint:* Both `add` and `check` only require 3-4 lines of code to implement fully - most of this is practice understanding the inner workings of a Bloom filter and Motoko syntax.
 
 ### Testing
+Note, you may need to download the *package vessel* to your local machine. Instructions to do so can be found here: https://github.com/DFINITY-Education/data-structures/blob/master/downloading_vessel.md
 
 As you progress through your implementation of the Bloom filter, you can periodically self-test your work using the command line interface (CLI) after you've built and deployed the corresponding canisters.
 
