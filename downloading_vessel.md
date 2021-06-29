@@ -10,4 +10,4 @@
 6. From there, depending on the file you downloaded and where it was saved locally, you want to move that file. 
 Something like so: *mv Downloads/vessel-macos /usr/local/bin/vessel*
 8. Note, if "permission is denied", execute the following command: *sudo mv Downloads/vessel-macos /usr/local/bin/vessel*
-9. Make vessel and executable by the following command: chmod +x /usr/local/bin/vessel
+9. Make vessel and executable by the following command: *chmod +x /usr/local/bin/vessel*
