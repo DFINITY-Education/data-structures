@@ -57,8 +57,8 @@ The `BloomFilter` takes advantage of **generic types**, represented by `S`, whic
 
 **`check`** determines if the element is in the `bitMap`
 
-* `check` also takes one argument, `item`, representing the item it be added to the Bloom Filter, and returns `true` if it is contained and `false` otherwise. Remember that a `true` result isn't definitive - there is a chance of returning a false positive.
-* You must again apply each function in `hashFuncs` to `item`. `check` returns `true` if and only if none of the resulting hashes indicate the existence of `item` in the Bloom filter.
+* `check` also takes one argument, `item`, representing the item to be checked for presence in the Bloom Filter, and returns `true` if it is contained and `false` otherwise. Remember that a `true` result isn't definitive - there is a chance of returning a false positive.
+* You must again apply each function in `hashFuncs` to `item`. `check` returns `true` if and only if every of the resulting hashes indicate the existence of `item` in the Bloom filter.
 
 *Hint:* Both `add` and `check` only require 3-4 lines of code to implement fully - most of this is practice understanding the inner workings of a Bloom filter and Motoko syntax.
 

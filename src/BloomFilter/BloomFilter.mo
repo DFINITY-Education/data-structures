@@ -19,7 +19,7 @@ module {
 
     var filters: [BloomFilter<S>] = [];
 
-    let numSlices = Float.ceil(Float.log(1.0 / errorRate));
+    let numSlices = Float.ceil(Float.log(1.0 / errorRate)/Float.log(2));
     let bitsPerSlice = Float.ceil(
           (Float.fromInt(capacity) * Float.abs(Float.log(errorRate))) /
           (numSlices * (Float.log(2) ** 2)));
@@ -29,15 +29,25 @@ module {
     /// Args:
     ///   |item|   The item to be added.
     public func add(item: S) {
-      var filter = BloomFilter(bitMapSize, hashFuncs);
-      if (filters.size() > 0) {
-        let last_filter = filters[filters.size() - 1];
-        if (last_filter.getNumItems() < capacity) {
-          filter := last_filter;
-        };
+      var newFilter: Bool = false;
+      var filter: BloomFilter<S> = do {
+        if (filters.size() > 0) {
+          let last_filter = filters[filters.size() - 1];
+          if (last_filter.getNumItems() < capacity) {
+            last_filter
+          } else {
+            newFilter := true;
+            BloomFilter(bitMapSize, hashFuncs)
+          }
+        } else {
+          newFilter := true;
+          BloomFilter(bitMapSize, hashFuncs)
+        }
       };
       filter.add(item);
-      filters := Array.append<BloomFilter<S>>(filters, [filter]);
+      if (newFilter) {
+        filters := Array.append<BloomFilter<S>>(filters, [filter]);
+      };
     };
 
     /// Checks if an item is contained in any BloomFilters
@@ -74,7 +84,7 @@ module {
     public func check(item: S) : Bool {
       for (f in Iter.fromArray(hashFuncs)) {
         let digest = Word.toNat(f(item)) % bitMapSize;
-        if (bitMap[digest] == true) return false;
+        if (bitMap[digest] == false) return false;
       };
       true
     };
@@ -89,7 +99,7 @@ module {
 
     public func setData(data: [Bool]) {
       assert data.size() == bitMapSize;
-      for (i in Iter.range(0, data.size())) {
+      for (i in Iter.range(0, data.size()-1)) {
         bitMap[i] := data[i];
       };
     };
