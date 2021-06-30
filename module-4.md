@@ -16,7 +16,7 @@ A `BigMap` canister instance has already been deployed for this exercise (check 
 
 #### `BloomFilter.mo`
 
-Let's start by taking a look at `BigMap/BloomFilter.mo`. The `BigMapBloomFilter` class maintains our `BigMap` extension of `BloomFilter`, and you should notice that much of the code in this class parallels the code in `BloomFilter/BloomFilter.mo` that we used in [Module 2](/module-2.md). Feel free to reference that module again for a more in-depth description of the `BloomFilter` implementation.
+Let's start by taking a look at `BigMapBloomFilter/BigMapBloomFilter.mo`. The `BigMapBloomFilter` class maintains our `BigMap`-extension of `BloomFilter`, and you should notice that much of the code in this class parallels the code in `BloomFilter/BloomFilter.mo` that we used in [Module 2](/module-2.md). Feel free to reference that module again for a more in-depth description of the `BigMapBloomFilter` implementation.
 
 `add` and `check` are the two functions that you will implement for this module. They serve the same general purpose as the parallel functions in `BloomFilter/BloomFilter.mo`, but this time they incorporate the `BigMap` extension.
 
@@ -24,31 +24,31 @@ Let's start by taking a look at `BigMap/BloomFilter.mo`. The `BigMapBloomFilter`
 
 The `Utils.mo` file contains several helper functions that you may find useful in completing the implementations of `add` and `check`. 
 
-`serialize` takes in a list of booleans (corresponding to the `hashMap`) and converts it to a list of 1s and 0s of type `Word8`. Unsurprisingly, `unserialize` performs the reverse operation. The aptly named `convertNat8toWord8` and `convertWord8toNat8` are useful for converting to and from serialized formats for storage and retrieval from `BigMap`. Finally, `constructWithData` creates a new `BloomFilter` with the provided `data` (the `hashMap` of a `BloomFilter`), `bitMapSize`, and `hashFuncs`. Notice that this function utilizes the `setData` function from `BloomFilter/BloomFilter.mo`. The purpose of these functions will become apparent in the specification below.
+`serialize` takes in a list of booleans (corresponding to the `hashMap`) and converts it to a list of 1s and 0s of type `Nat8`. Unsurprisingly, `unserialize` performs the reverse operation. Finally, `constructWithData` creates a new `BloomFilter` with the provided `data` (the `hashMap` of a `BloomFilter`), `bitMapSize`, and `hashFuncs`. Notice that this function utilizes the `setData` function from `BloomFilter/BloomFilter.mo`. The purpose of these functions will become apparent in the specification below.
 
 #### `Main.mo`
 
-`Main.mo` instantiates a `BigMapBloomFilter` object with a few pre-entered parameters and provides two functions, `add` and `check`. These functions are the public interface that allow you to call `add` and `check` within the `BigMapBloomFilter` from the command line interface (for testing) or from other canisters. The only significant different between this implementation and `BloomFilter/Main.mo` is that the two functions both require a `key` parameter. The `key` is what `BigMap` uses to index between canisters.
+`Main.mo` instantiates a `BigMapBloomFilter` object with a few pre-entered parameters and provides two functions, `add` and `check`. These functions are the public interface that allow you to call `add` and `check` within the `BigMapBloomFilter` from the command line interface (for testing) or from other canisters. The only significant difference between this implementation and `BloomFilter/Main.mo` is that the two functions both require a `key` parameter. The `key` is what `BigMap` uses to index between canisters.
 
 ### Specification
 
-**Task:** Complete the implementation of the `add` and `check ` methods in `BloomFilter.mo`.
+**Task:** Complete the implementation of the `add` and `check ` methods in `BigMapBloomFilter.mo`.
 
-**`add`** takes in a `key` and an `item` and adds that key, value pair to the `BloomFilter`
+**`add`** takes in a `key` and an `item` and adds that key, value pair to the `BigMapBloomFilter`
 
 * Start by understanding the `BigMap` API: `put` and `get`. Their function signatures are as follows:
 ```
-func get(key : [Word8]) : async ?[Word8]
+func get(key : [Nat8]) : async ?[Nat8]
 ```
 ```
-func put(key : [Word8], value : [Word8]) : async ()
+func put(key : [Nat8], value : [Nat8]) : async ()
 ```
 * Understand how the `un`/`serialize` data transformation functions from the `Utils` module can help "massage" Bloom filter data into the appropriate formats.
 * Think through the similarities and differences in how to approach the implementation of `add` and `check` for `BigMapBloomFilter` and `AutoScalingBloomFilter`. Now that we receive a key as input, how do we retrieve data from `BigMap` and convert it into a format we can interact with? How do we store the updated data back into `BigMap`?
 * Be sure to leverage other functions from the `Utils` module: `constructWithData`, etc. will come in handy!
 * Remember to unwrap results from a BigMap query.
 
-**`check`** takes in a `key` and an `item` and checks if that `item` is contained in any of the `BloomFilters`
+**`check`** takes in a `key` and an `item` and checks if that `item` is contained in any of the `BloomFilter`s
 
 * As above, be sure to leverage functions from the `Utils` module.
 * Similarly, remember to unwrap results from a BigMap query.

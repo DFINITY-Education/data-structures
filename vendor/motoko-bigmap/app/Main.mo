@@ -38,7 +38,7 @@ actor {
     bm.getReady()
   };
 
-  public func get(key : [Word8]) : async ?[Word8] {
+  public func get(key : [Nat8]) : async ?[Nat8] {
     Debug.print "BigMap get begin";
     if (not (bm.isReady())) {
       Debug.print "Error: Not ready.";
@@ -53,7 +53,7 @@ actor {
     }
   };
 
-  public func put(key : [Word8], value : [Word8]) : async () {
+  public func put(key : [Nat8], value : [Nat8]) : async () {
     Debug.print "BigMap put begin";
     if (not (bm.isReady())) {
       Debug.print "Error: Not ready.";

@@ -2,7 +2,7 @@ import T "Types";
 import Array "mo:base/Array";
 import P "mo:base/Prelude";
 import Order "Order"; // TEMP
-import SHA256 "mo:motoko-sha/SHA256";
+import SHA256 "mo:sha256/SHA256";
 import Prim "mo:prim";
 import Debug "DebugOff";
 //import Debug "mo:base/Debug";
@@ -13,13 +13,13 @@ import Iter "mo:base/Iter";
 module {
   type SegKey = T.SegKey;
 
-  public func ofKey(bytes : T.Key) : SegKey = {
+  public func ofKey(bytes : T.Key) : SegKey {
     let hashed = SHA256.sha256(bytes);
     ?hashed;
   };
 
   public func zero() : SegKey =
-    ?Array.tabulate<Word8>(32, func (_) = Prim.natToWord8(0));
+    ?Array.tabulate<Nat8>(32, func (_) = Prim.natToNat8(0));
 
   public func inf() : SegKey = null;
 
@@ -30,8 +30,8 @@ module {
     }
   };
 
-  public func hash(x : SegKey) : Word32 {
-    let blowup : Word8 -> Word32 = func (x) { Prim.natToWord32(Prim.word8ToNat(x)) };
+  public func hash(x : SegKey) : Nat32 {
+    let blowup : Nat8 -> Nat32 = func (x) { Prim.natToNat32(Prim.nat8ToNat(x)) };
     switch x {
       case null { P.unreachable() };
       case (?x) {
@@ -55,8 +55,8 @@ module {
   public func uniformSegments(n:Nat) : [SegKey] {
     assert (n < 255); // to do -- handle larger cases of n
     // 0000..00, 0100..00, 0200..00, ..., ff00..00
-    let dist = Prim.natToWord8(255 / n);
-    let keyData : [var Word8] = Array.init<Word8>(32, 0);
+    let dist = Prim.natToNat8(255 / n);
+    let keyData : [var Nat8] = Array.init<Nat8>(32, 0);
     let segKeys = Buf.Buffer<SegKey>(n);
     for (i in Iter.range(0, n - 1)) {
       segKeys.add(?Array.freeze(keyData));
@@ -65,7 +65,7 @@ module {
     segKeys.toArray()
   };
 
-  public func compare(x : ?[Word8], y : ?[Word8]) : Order.Order {
+  public func compare(x : ?[Nat8], y : ?[Nat8]) : Order.Order {
     // null means 'infinity'
     Debug.print "SegKey SegKey";
     Debug.print ("SegKey compare bytes " # (debug_show (x, y)));

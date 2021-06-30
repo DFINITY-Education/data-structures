@@ -1,13 +1,13 @@
 import HashMap "mo:base/HashMap";
 
 module {
-  public type Key = [Word8];
-  public type Val = [Word8];
+  public type Key = [Nat8];
+  public type Val = [Nat8];
 
   // SegKey type:
   // - compared to the (plaintext) Key type, these are hashed via the SHA256 package.
   // - the (unique) null key means "infinite hash value", always ending the ring.
-  public type SegKey = ?[Word8];
+  public type SegKey = ?[Nat8];
 
   // SegKey intervals: [first included, last excluded)
   public type Interval = (SegKey, SegKey);

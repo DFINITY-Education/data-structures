@@ -71,7 +71,7 @@ module {
       getRec(canisters)
     };
 
-    public func isReady() : Bool = {
+    public func isReady() : Bool {
       switch segments {
         case null true;
         case _ false;

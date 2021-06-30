@@ -1,17 +1,11 @@
-let upstream =
-    https://raw.githubusercontent.com/kritzcreek/vessel-package-set/b8a50b772af45877ed1d7fae929c415820790b01/src/packages.dhall sha256:2ba38db2e5454a25e91841ba93e8f7bdb4b73fd59e0e6e2f3d8550d61fa63b1c
-
+let upstream = https://github.com/dfinity/vessel-package-set/releases/download/mo-0.6.1-20210511/package-set.dhall sha256:aa5083f7cfd9dd0ddbd0210847175417a7efeaf8adcca6838fe9dd2ac460d236
 let Package =
     { name : Text, version : Text, repo : Text, dependencies : List Text }
 
 let
   -- This is where you can add your own packages to the package-set
-  additions = [ { name = "motoko-sha"
-      , repo = "https://github.com/enzoh/motoko-sha"
-      , version = "master"
-      , dependencies = [] : List Text
-      }
-    ] : List Package
+  additions =
+    [] : List Package
 
 let
   {- This is where you can override existing packages in the package-set

@@ -1,4 +1,4 @@
 {
-  dependencies = [ "base", "motoko-sha" ],
-  compiler = Some "0.4.2"
+  dependencies = [ "base", "sha256" ],
+  compiler = None Text
 }

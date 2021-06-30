@@ -1,11 +1,12 @@
 {
+  "dfx": "0.7.2",
   "canisters": {
     "BigMap": {
       "main": "vendor/motoko-bigmap/app/Main.mo",
       "type": "motoko"
     },
     "BigMapBloomFilter": {
-      "main": "src/BigMap/Main.mo",
+      "main": "src/BigMapBloomFilter/Main.mo",
       "type": "motoko"
     },
     "BloomFilter": {
@@ -21,19 +22,5 @@
     "build": {
       "packtool": "vessel sources"
     }
-  },
-  "dfx": "0.6.7",
-  "networks": {
-    "local": {
-      "bind": "127.0.0.1:8000",
-      "type": "ephemeral"
-    },
-    "tungsten": {
-      "providers": [
-        "https://gw.dfinity.network"
-      ],
-      "type": "persistent"
-    }
-  },
-  "version": 1
+  }
 }
