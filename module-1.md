@@ -88,7 +88,7 @@ class HashMap<K, V>(initCapacity : Nat, keyEq : (K, K) -> Bool, keyHash : K -> H
 
 While data structures implemented in the object-oriented style are supported within canisters, they shouldn't necessarily be used to send data across canisters or to persist data in canisters that will be upgraded in the future. [Stable](https://sdk.dfinity.org/docs/language-guide/actors-async.html#_stable_and_flexible_variables) data stored within canisters must be first order (like an `Int` or `Text`), meaning that it cannot contain objects. 
 
-### BigMap
+### [**BigMap**] (https://www.youtube.com/watch?v=VcsIb37I2fM)
 
 Canisters on the Internet Computer have a maximum storage capacity of about 4 GB. However, large applications require significantly larger storage capabilities that necessarily need to span multiple canisters for adequate storage. That's where BigMap comes in. BigMap helps developers scale data across multiple canisters, allowing them to more easily store petabytes of data on the IC.
 
